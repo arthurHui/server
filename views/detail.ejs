@@ -1,0 +1,94 @@
+
+<html>
+    <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Doutor</title>
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+    <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+    <stype
+    </head>
+    <body>
+    <script>
+    function goBack() {window.history.back();}
+    </script>
+    <script>
+        function loadMap ()
+        {
+          var myLatLng = {lat: 35.691780, lng: 139.699367};
+          //var myLatLng = new google.maps.LatLng({lat: 35.691780, lng: 139.699367});
+          var map = new google.maps.Map(document.getElementById("map"),{
+                zoom: 18,
+                center: myLatLng
+          });
+          var marker = new google.maps.Marker({
+             position: myLatLng,
+             map: map,
+             title: 'restaurant'
+          });
+        }
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBkfp0OSPZ0fl8ZF3a0tea-mp36-mp_8b8&callback=loadMap"></script>
+    <div class="w3-container w3-teal">
+        <H2>Restaurant Details</H2><hr>
+    </div>
+    
+    <p>Restaurant ID: <%= restaurant._id %></p>
+
+    <% if (restaurant.photo) { %>
+        <img src="data:image/jpg;base64, <%= restaurant.photo %>"><br>
+    <% } %>
+    
+    <div class="w3-container">
+    <p>
+      <form>
+    <input type="hidden" name="owner" value=<%= restaurant.owner %>>
+  </form>
+    <label class="w3-label w3-validate">name: </label><%=restaurant.name%></p>
+    <label class="w3-label w3-validate">Borough: </label><%=restaurant.borough%></p>
+    <label class="w3-label w3-validate">Cuisine: </label><%=restaurant.cuisine%></p>
+    <label class="w3-label w3-validate">Street: </label><%=restaurant.address.street%></p>
+    <label class="w3-label w3-validate">Building: </label><%=restaurant.address.building%></p>
+    <label class="w3-label w3-validate">Zipcode: </label><%=restaurant.address.zipcode%></p>
+    <label class="w3-label w3-validate">GPS: </label>[<%=restaurant.address.coord.lon%>,<%=restaurant.address.coord.lat%>]</p>
+    <label class="w3-label w3-validate">Rating: </label></p>
+    <ol>
+    <% for (var g of restaurant.grades) { %>
+      <li><%=g.score%> (<%=g.name%>)</li>
+      <% } %>
+    </ol>
+  
+    <label class="w3-label w3-validate">Created by: </label><%=restaurant.owner%></p>
+    <p>
+    </div>
+    
+    <a href="/map?lon=<%=restaurant.address.coord.lon%>&lat=<%=restaurant.address.coord.lat%>&title=<%= restaurant.name %>">Map</a>
+    
+    <div class="w3-container">
+    <a href="/rate?_id=<%= restaurant._id %>&name=<%= restaurant.name %>" style="text-decoration: none">
+        <button class="w3-btn w3-section w3-teal w3-ripple">Rate</button>
+    </a>
+    <a href="/edit?_id=<%= restaurant._id %>" style="text-decoration: none">
+      <button class="w3-btn w3-section w3-teal w3-ripple">Edit</button>
+    </a>
+    <a href="/remove?_id=<%= restaurant._id %>" style="text-decoration: none">
+      <button class="w3-btn w3-section w3-teal w3-ripple">Delete</button>
+    </a>
+    <button class="w3-btn w3-section w3-teal w3-ripple" onclick="goBack()">Go Back</button>
+    </div>
+    </body>
+    </html>
+    
