@@ -16,8 +16,7 @@ const SECRETKEY = 'restaurant';
 var owner = "";
 
 const users = new Array(
-	{name: 'developer', password: 'developer'},
-	{name: 'guest', password: 'guest'},
+	{name: 'student', password: ''},
 	{name: 'demo', password: ''}
 );
 
