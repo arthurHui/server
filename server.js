@@ -6,7 +6,7 @@ const MongoClient = require('mongodb').MongoClient;
 const ObjectID = require('mongodb').ObjectID;
 const assert = require('assert');
 const fs = require('fs');
-const mongourl = 'mongodb+srv://rso:A30058989a@cluster0.fplts.mongodb.net/test?retryWrites=true&w=majority';
+const mongourl = 'mongodb+srv://username:password@cluster0.fplts.mongodb.net/test?retryWrites=true&w=majority';
 const dbName = 'test';
 
 app.use(express.json());
