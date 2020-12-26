@@ -79,18 +79,19 @@ const handle_Edit = (res,req, criteria) => {
             let DOCID = {};
             DOCID['_id'] = ObjectID(criteria._id);
             DOCID['owner'] = req.session.username;
-            findDocument(db, DOCID, (err,docs) => {  // docs contain 1 document (hopefully)
-                if(err){
-                    client.close();
-                    console.log("Closed DB connection");
-                    res.redirect('/editerr');
-                }else{
-                    client.close();
-                    console.log("Closed DB connection");
-                    res.status(200).render('edit', {restaurant: docs[0]});
-                }
-                
-            });
+            findDocument(db, DOCID, (docs) => {  // docs contain 1 document (hopefully)
+            console.log(docs);
+            if(docs[0] == null){
+                client.close();
+                console.log("Closed DB connection");
+                res.redirect('/editerr');
+            }else{
+                client.close();
+                console.log("Closed DB connection");
+                res.status(200).render('edit', {restaurant: docs[0]});
+            }
+
+        });
     });
 }
 
